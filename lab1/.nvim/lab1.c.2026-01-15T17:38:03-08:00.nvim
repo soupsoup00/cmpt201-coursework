@@ -1,0 +1,10 @@
+#include <stdio.h>
+#include <unistd.h>
+
+int main() {
+  
+  int n = 0;
+  printf("Please enter text: ");
+  while(
+#
+}
