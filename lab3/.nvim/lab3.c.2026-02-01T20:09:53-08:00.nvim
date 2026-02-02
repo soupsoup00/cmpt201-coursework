@@ -1,0 +1,55 @@
+#define _GNU_SOURCE
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
+
+void print_history(char *arr[]);
+char *get_input();
+void check_print(char *str, char *arr[]);
+
+int main() {
+  // read user input, incl spaces
+  // store last 5 lines
+  // input print to print the stored inputs
+
+  // use array to store [0,1,2,3,4
+  // print in same order 0-5, keep count of where current index is
+
+  char *arr[5] = {NULL};
+  int idx = 0;
+
+  while (1) {
+    printf("Enter input: ");
+    arr[idx] = get_input();
+    check_print(arr[idx], arr);
+    idx = (idx + 1) % 5;
+  }
+  // TODO ; free mem in array
+  // free(line);
+}
+
+void check_print(char *str, char *arr[]) {
+  if (strcmp(str, "print") == 0) {
+//    printf("run");
+    print_history(arr);
+  }
+//  printf("%s", str);
+}
+
+char *get_input() {
+  char *line = NULL;
+  size_t len = 0;
+  ssize_t input = getline(&line, &len, stdin);
+  if (input != -1) {
+    // remove \n
+    line[strcspn(line, "\n")] = 0;
+  }
+  return line;
+}
+
+void print_history(char *arr[]) {
+  for (int i = 0; i < 5; i++) {
+    printf("%s\n", arr[i]);
+  }
+}

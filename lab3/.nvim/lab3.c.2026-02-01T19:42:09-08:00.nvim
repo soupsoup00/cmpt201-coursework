@@ -1,0 +1,45 @@
+#define _GNU_SOURCE
+#include <stdbool.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
+
+void print_history(char *arr[]) {
+  for (int i = 0; i < 5; i++) {
+    printf("%s\n", arr[i]);
+  }
+}
+
+int main() {
+  // read user input, incl spaces
+  // store last 5 lines
+  // input print to print the stored inputs
+
+  // use array to store [0,1,2,3,4
+  // print in same order 0-5, keep count of where current index is
+
+  char *arr[5];
+  bool run = true;
+  char *line = NULL;
+  size_t len = 0;
+  ssize_t input;
+  int idx = 0;
+
+  while (run) {
+    printf("Enter input: ");
+    input = getline(&line, &len, stdin);
+    if (input != -1) {
+      arr[idx] = line;
+      if (strcmp(line, "print\0\n") == 0) {
+        printf("run");
+        print_history(arr);
+      }
+      printf("%s", line);
+    }
+    idx = (idx + 1) % 5;
+    //  printf("word: %s", arr[idx]);
+  }
+
+  free(line);
+}

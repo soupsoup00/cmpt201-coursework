@@ -1,0 +1,30 @@
+#include <stdio.h>
+#include <unistd.h>
+#include <stdbool.h>
+#include <stdlib.h>
+#include <string.h>
+
+int main() {
+// read user input, incl spaces
+// store last 5 lines
+// input print to print the stored inputs
+
+// use array to store [0,1,2,3,4
+// print in same order 0-5, keep count of where current index is
+
+  char arr[5];
+  bool run = true;
+  char *line = NULL;
+  size_t len = 0;
+  int idx = 0;
+
+  while(run){
+    printf("Enter input: ");
+    arr[idx] = getline(&line, &len, stdin);
+    printf("%s", arr[idx]);
+
+  }
+
+
+
+}
