@@ -1,0 +1,19 @@
+#define _DEFAULT_SOURCE
+#include <stdio.h>
+#include <unistd.h>
+#include <stdlib.h>
+#include <stdint.h>
+
+int main() {
+  // increas heap size by 256 bytes w sbrk
+  ssize_t breakLoc = sbrk(256);
+  
+  struct header {
+    unit64_t size;
+    struct header* next;
+  };
+  // create 2 equal size mem blocks
+  // print
+  //
+  return 0;
+}
