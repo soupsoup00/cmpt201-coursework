@@ -1,0 +1,24 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <sys/wait.h>
+
+
+int main() {
+  pid_t pid = fork();
+  if (pid == 0) { // child
+    execlp("ls", "ls", "-al");
+    //   printf("child, %d, %d\n", getpid(), getppid());
+  } else {
+    //    printf("parent, %d, %d\n", getpid(), pid);
+    //execlp("ls", "ls", "-a");
+    int *wstatus = 0;
+    waitpid(pid, wstatus, 0);
+
+    if(WIFEXITED(*wstatus)){
+      printf("exit status %d\n", WEXITSTATUS(*wstatus));
+    }
+  }
+  printf("%d\n", getpid()); // wont print bc of execs ^^
+  return 0;
+}

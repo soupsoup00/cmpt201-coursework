@@ -1,0 +1,34 @@
+#define _GNU_SOURCE
+#include <stdbool.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
+
+int main(int argc, char *argv[]) {
+  char *line = NULL;
+  size_t len = 0;
+  FILE *stream;
+  ssize_t input;
+  bool run = 1;
+  char *token, *subtoken;
+  char *saveptr, saveptr2;
+
+  while (run) {
+    printf("Please enter text: ");
+    input = getline(&line, &len, stdin);
+    char *str = line;
+
+    if (input != -1) {
+      while ((token = strtok_r(str, " ", &saveptr))) {
+        // first call
+        printf("%s\n", token);
+        str = NULL;
+      }
+    } else {
+      printf("failed to read line \n");
+    }
+
+    free(line);
+  }
+}

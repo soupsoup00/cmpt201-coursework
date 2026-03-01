@@ -1,0 +1,12 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+
+int main() {
+  for (int i = 0; i < 10; i++) {
+    char *msg = "ugh\n";
+    fork();
+    sleep(2);
+    printf("%s", msg);
+  }
+}
